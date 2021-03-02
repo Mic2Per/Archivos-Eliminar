@@ -23,14 +23,15 @@ void eliminar();
 
 main(){
 
+	abrir2();
 	abrir();
 	ingresar();
 	modificar();
+	eliminar();
 
 }
 
 void abrir(){
-
 	system("cls");
 	FILE* archivo = fopen(nombre_archivo,"rb");
 	if (!archivo){
@@ -119,14 +120,68 @@ void modificar(){
 }
 
 void eliminar(){
+	/*FILE* archivo = fopen(nombre_archivo,"r+b");
 	FILE* archivo2 = fopen(nombre_archivo2,"r+b");
-	FILE* archivo = fopen(nombre_archivo,"r+b");
 	int cam;
-	bool encontrado=false;
+	int tre;
+	int id;
+	bool enco=false;
 	string nombre,apellido;
 	Estudiante estudiante;
 	
 	cout<<"Ingrese el ID que desea eliminar:";
-	cin>>cam;
+	cin>>id;
+	while(feof(archivo)==0){
+		fread(&estudiante,sizeof(Estudiante),1,archivo);
+		if(id==id){
+			enco=true;
+			cout<<"El registro ha sido eliminado";
+						
+		}else{
+			FILE* archivo2 = fopen(nombre_archivo2,"r+b");
+			Estudiante estudiante;
+			string nombre,apellido;
+			int codigo,telefono;
 			
+			fseek(archivo,id*sizeof(Estudiante),SEEK_SET);
+				codigo=estudiante.codigo;
+				nombre=estudiante.nombres;
+				apellido=estudiante.apellidos;
+				telefono=estudiante.telefono;
+			fwrite(&estudiante,sizeof(Estudiante),1,archivo);
+			fclose(archivo2);
+		}
+		
 	}
+	if(enco=false){
+		cout<<"resgitro no encontrado";
+		
+	}
+	fclose(archivo);
+	fclose(archivo2);
+	remove(nombre_archivo);
+	rename(nombre_archivo2,nombre_archivo);*/
+	FILE* archivo = fopen(nombre_archivo,"r+b");
+	int id;
+	string nombre,apellido;
+	Estudiante estudiante;
+
+	cout<<"Ingrese el ID que desea eliminar: ";
+	cin>>id;
+
+	fseek(archivo,id*sizeof(Estudiante),SEEK_SET);
+		estudiante.codigo=0;
+		nombre=" ";
+		strcpy(estudiante.nombres,nombre.c_str());
+		apellido=" ";
+		strcpy(estudiante.apellidos,apellido.c_str());
+		estudiante.telefono=0;
+		fwrite(&estudiante,sizeof(Estudiante),1,archivo);
+		fclose(archivo);
+		abrir();
+	};
+
+
+
+
+
